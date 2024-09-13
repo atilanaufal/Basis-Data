@@ -1,27 +1,221 @@
-//Buatlah table Employee dengan atribut berikut menggunakan perintah CREATE
+-- Latihan menjalankan perintah SQL (1)
+-- Buatlah table Employee dengan atribut berikut menggunakan perintah CREATE
 CREATE TABLE Employee (
 id_emp varchar(5),
 name_emp varchar(50),
 age int
 );
 
-//Tampilkan tabel yang telah dibuat dengan perintah SELECT
+
+-- Tampilkan tabel yang telah dibuat dengan perintah SELECT
 SELECT * FROM Employee
 
-//Tambahkan data dengan perintah INSERT jalankan 2x 
+-- Tambahkan data dengan perintah INSERT jalankan 2x 
 INSERT INTO Employee (id_emp, name_emp, age)
 VALUES ('123', "Budi", 21);
 INSERT INTO Employee (id_emp, name_emp, age)
 VALUES ('123.', "Budi", 21);
 
-//Tampilkan data yang telah di-INSERT dengan perintah SELECTmaka data yang muncul adalah sebagai berikut
+
+-- Latihan menjalankan perintah SQL (2)
+-- Tampilkan data yang telah di-INSERT dengan perintah SELECT
+-- maka data yang muncul adalah sebagai berikut
 SELECT * FROM Employee
 
-//Perhatikan apakah data benar? Terjadi duplikasi data
-//Maka ubah data baris kedua menjadi sbb, gunakan perintah update untuk baris data kedua
+-- Perhatikan apakah data benar? Terjadi duplikasi data
+-- Maka ubah data baris kedua menjadi sbb, gunakan perintah update untuk baris data kedua
 UPDATE employee
 SET id_emp = 234, name_emp = "Dani", age = 23
 WHERE id_emp = '123.' AND name_emp = 'Budi'; 
+
+
+-- Latihan menjalankan perintah SQL (3)
+-- Buat id_emp pada table Employee menjadi Primary Key dg perintah ALTER TABLE
+Tampilkan struktur table Employee 
+ALTER TABLE Employee
+ADD PRIMARY KEY (id_Emp);
+
+-- Tampilkan struktur table Employee 
+DESCRIBE employee;
+
+-- Tambahkan data berikut 
+INSERT INTO Employee (id_emp, name_emp, age)
+VALUES ('123', "Arief", 24);
+
+-- Apa yang terjadi? Apa kesimpulan yang bisa didapat?
+Error Code: 1062. Duplicate entry '123' for key 'employee.PRIMARY'
+"PRIMARY KEY membuat data pada id_emp tidak bisa memiliki duplikat"
+
+
+-- Latihan menjalankan perintah SQL (4)
+-- Tambahkan data berikut 
+INSERT INTO Employee (id_emp, name_emp, age)
+VALUES ('134', "Arief", 24);
+INSERT INTO Employee (id_emp, name_emp, age)
+VALUES ('144', "Intan", 20);
+INSERT INTO Employee (id_emp, name_emp, age)
+VALUES ('155', "Ayu", 21);
+
+-- Apa yang terjadi? Apa kesimpulan yang bisa didapat?
+"Data dapat dimasukkan dengan normal
+
+-- Penggunaan WHERE condition
+-- Hapus data dengan id_emp = 123 
+-- Hapus data yang bernama “Intan”
+-- Hapus data dengan age 21 
+DELETE FROM employee WHERE id_emp = "123";
+DELETE FROM employee WHERE name_emp = "Intan";
+DELETE FROM employee WHERE age = 21;
+
+-- Tampilkan hasilnya masing-masing, apakah data masih ada?
+"Seluruh data yang memiliki kaitan dengan id = 123, nama = intan, dan age = 21, terhapus dari tabel"
+
+-- Batalkan penghapusan data 
+ROLLBACK
+
+
+-- Latihan dalam menjalankan perintah SQL (5)
+-- Tambahkan kembali data berikut :
+INSERT INTO Employee (id_emp, name_emp, age)
+VALUES ('211', "Mulya", 21);
+INSERT INTO Employee (id_emp, name_emp, age)
+VALUES ('212', "Dewi", 22);
+INSERT INTO Employee (id_emp, name_emp, age)
+VALUES ('213', "Ayu", 23);
+
+-- Tampilkan data hasil penambahan
+SELECT * FROM Employee
+
+-- Jalankan perintah SQL utk menghapus semua data
+DELETE FROM employee;
+
+-- Tampilkan data ditabel, apakah masih muncul?
+"Semua data menghilang"
+
+
+-- Latihan dalam menjalankan perintah SQL (6)
+-- Tambahkan kembali semua data
+INSERT INTO Employee (id_emp, name_emp, age)
+VALUES ('123', "Budi B", 21);
+INSERT INTO Employee (id_emp, name_emp, age)
+VALUES ('234', "Dani", 23);
+INSERT INTO Employee (id_emp, name_emp, age)
+VALUES ('134', "Budi A", 24);
+INSERT INTO Employee (id_emp, name_emp, age)
+VALUES ('144', "Intan", 20);
+INSERT INTO Employee (id_emp, name_emp, age)
+VALUES ('155', "Budi W", 25);
+
+-- Tampilkan data dengan nama Budi dan usia diatas 21 tahun
+SELECT * FROM employee WHERE name_emp = "Budi" AND age > 21;
+
+-- Tampilkan data dengan usia antara 22-24 tahun 
+SELECT * FROM Employee WHERE age BETWEEN 22 AND 24;
+
+
+-- Latihan dalam menjalankan perintah SQL (7)
+-- Tambahkan kolom “gol” varchar (5) pada table Employee
+ALTER TABLE Employee
+ADD gol VARCHAR(5);
+
+--Lalu isi kolom gol sehingga menjadi sebagai berikut 
+UPDATE Employee
+SET gol = CASE
+    WHEN id_emp = '123' THEN 'I'
+    WHEN id_emp = '234' THEN 'II'
+    WHEN id_emp = '134' THEN 'III'
+    WHEN id_emp = '144' THEN 'II'
+    WHEN id_emp = '155' THEN 'I'
+END;
+
+-- Apa yang terjadi jika mengubah data tanpa menggunakan WHERE condition?
+"Jika mengupdate data tanpa menggunakan kondisi WHERE, maka seluruh data pada table akan ikut terkena"
+
+
+-- Latihan dalam menjalankan perintah SQL (7)
+-- Praktekan bagaimana penggunaan
+-- BETWEEN (numerik)
+SELECT * FROM Employee WHERE age BETWEEN 22 AND 24; 
+
+-- NOT BETWEEN
+SELECT * FROM Employee WHERE age NOT BETWEEN 21 AND 23;
+
+-- BETWEEN (varchar)
+SELECT * FROM Employee WHERE name_emp BETWEEN 'Budi A' AND 'Budi W'
+
+-- IN/NOT IN
+SELECT * FROM Employee WHERE gol IN ('I', 'II')
+
+-- LIKE
+SELECT * FROM Employee WHERE name_emp LIKE 'Budi%'
+
+-- AND 
+UPDATE employee
+SET id_emp = 234, name_emp = "Dani", age = 23
+WHERE id_emp = '123.' AND name_emp = 'Budi'; 
+
+
+-- Latihan menjalankan perintah SQL (8)
+-- Buat table lain dengan struktur sama
+CREATE TABLE Employee2 (
+id_emp varchar(5),
+name_emp varchar(50),
+age int
+);
+
+-- isi data kedalam table tersebut
+-- praktekan sesuai data tersebut dan insert ke table Employee
+INSERT INTO Employee2 (id_emp, name_emp, age)
+VALUES ('001', "Adis", 22);
+INSERT INTO Employee2 (id_emp, name_emp, age)
+VALUES ('002', "Denis", 22);
+INSERT INTO Employee2 (id_emp, name_emp, age)
+VALUES ('003', "Idil", 18);
+
+-- Gunakan WHERE condition untuk data yang di insert
+SELECT * FROM Employee2 WHERE id_emp = '003';
+
+
+-- Latihan menjalankan perintah SQL (9)
+-- Menambahkan data ke kolom tertentu saja 
+-- INSERT INTO nama_tabel (kolom1, kolom2) VALUES (nilai1, nilai2);
+INSERT INTO Employee2 (id_emp, name_emp)
+VALUES ('006', "Ikiw");
+
+-- Latihan menjalankan perintah SQL (10)
+-- Buatlah table golongan 
+CREATE TABLE Golongan (
+gol varchar(5),
+gol_name varchar(50)
+);
+
+-- Isi data dengan data berikut
+INSERT INTO Golongan (gol, gol_name) VALUES ('I', 'Golongan I');
+INSERT INTO Golongan (gol, gol_name) VALUES ('II', 'Golongan II');
+INSERT INTO Golongan (gol, gol_name) VALUES ('III', 'Golongan III');
+
+-- Buat FK dari Employee (gol) ke Golongan (gol)
+CREATE INDEX idx_golongan_id ON Golongan (gol);
+ALTER TABLE Employee
+ADD CONSTRAINT gol
+FOREIGN KEY (gol) REFERENCES Golongan(gol);
+
+
+-- Latihan menjalankan perintah SQL (11)
+-- Lakukan query SELECT dengan merelasikan kedua table Empoyee dan Golongan berdasarkan FK gol 
+SELECT Employee.id_emp, Employee.name_emp, Employee.age, Golongan.gol_name
+FROM Employee
+JOIN Golongan ON Employee.gol = Golongan.gol;
+
+
+
+
+
+
+
+
+
+
 
 
 
