@@ -1,0 +1,30 @@
+//Buatlah table Employee dengan atribut berikut menggunakan perintah CREATE
+CREATE TABLE Employee (
+id_emp varchar(5),
+name_emp varchar(50),
+age int
+);
+
+//Tampilkan tabel yang telah dibuat dengan perintah SELECT
+SELECT * FROM Employee
+
+//Tambahkan data dengan perintah INSERT jalankan 2x 
+INSERT INTO Employee (id_emp, name_emp, age)
+VALUES ('123', "Budi", 21);
+INSERT INTO Employee (id_emp, name_emp, age)
+VALUES ('123.', "Budi", 21);
+
+//Tampilkan data yang telah di-INSERT dengan perintah SELECTmaka data yang muncul adalah sebagai berikut
+SELECT * FROM Employee
+
+//Perhatikan apakah data benar? Terjadi duplikasi data
+//Maka ubah data baris kedua menjadi sbb, gunakan perintah update untuk baris data kedua
+UPDATE employee
+SET id_emp = 234, name_emp = "Dani", age = 23
+WHERE id_emp = '123.' AND name_emp = 'Budi'; 
+
+
+
+
+
+
