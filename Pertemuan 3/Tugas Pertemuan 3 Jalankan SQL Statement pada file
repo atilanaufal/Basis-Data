@@ -1,0 +1,132 @@
+1. Buat DATABASE
+CREATE DATABASE Product
+
+2. Buat Tabel customer dan product
+CREATE TABLE Product(
+ProductID INT PRIMARY KEY,
+ProductName VARCHAR(100),
+SupplierID INT,
+CategoryID INT,
+Unit VARCHAR(50),
+Price DECIMAL(10,2)
+);
+
+CREATE TABLE Customers(
+customerID INT PRIMARY KEY,
+customerName VARCHAR(100),
+contactName VARCHAR(100),
+address VARCHAR(255),
+city VARCHAR(100),
+postalCode VARCHAR(20),
+country VARCHAR(100)
+);
+
+3. Import Data dari excel ke masing-masing tabel
+Gunakan fitur Tabel Data Import Wizard. Sebelum mengimport data, dile excel dipisah menjadi dua file dengan format csv
+
+4. Lihat seluruh data pada kedua tabel
+SELECT * FROM Customers;
+SELECT * FROM Product;
+
+5. Mempraktekan syntax WHERE
+SELECT *  FROM Customers
+ORDER BY customerID;
+
+SELECT *  FROM Customers
+WHERE country = "Mexico";
+
+SELECT *  FROM Customers
+WHERE city in ("Paris", "London");
+
+SELECT *  FROM Product
+WHERE price >= 30;
+
+SELECT *  FROM Product
+WHERE price BETWEEN 50 AND 60;
+
+SELECT *  FROM Customers
+WHERE city LIKE "s%";
+
+SELECT *  FROM Customers
+WHERE country = "Germany" AND city = "Berlin";
+
+SELECT *  FROM Customers
+WHERE country = "Germany" OR city = "Berlin";
+
+SELECT *  FROM Customers
+WHERE NOT country = "Germany";
+
+SELECT CustomerName, ContactName, Address  FROM Customers
+WHERE Address is NULL;
+
+SELECT MIN(price) AS SmallestPrice FROM Product; 
+SELECT MAX(price) AS LargestPrice FROM Product; 
+
+SELECT City FROM Customer
+UNION
+SELECT City From Supplier
+ORDER BY City;
+
+SELECT ProductName FROM Products WHERE ProductID = ANY (SELECT ProductID FROM OrderDetails WHERE Quantity = 10);
+
+SELECT ALL ProductName FROM Products WHERE TRUE;
+
+SELECT * FROM Products WHERE Price > SOME (SELECT Price FROM Products WHERE Price > 20);
+
+SELECT * FROM Products WHERE EXISTS (SELECT Price XISTS FROM Products WHERE Price > 50);
+
+SELECT *, rowid FROM Employee WHERE rowid = 2;
+
+6. Mempraktekan Syntax ORDER BY
+SELECT * FROM Product
+ORDER BY Price ASC;
+
+SELECT * FROM Product
+ORDER BY ProductName DESC;
+
+SELECT * FROM Customers 
+ORDER BY Country ASC, CustomerName DESC;
+
+7. Mempraktekan Syntax Limit
+SELECT id pesanan, tanggal pesan 
+FROM pesanan LIMIT 10;
+
+8. Mempraktekan Syntax GROUP BY
+SELECT kóta, COUNT(*) AS Jumlah_pelanggan 
+FROM pelanggan
+GROUP BY kota;
+
+8. Mempraktekan Syntax ALIAS
+SELECT CustomerName, City, Country FROM Customers;
+SELECT CustomerName AS Customer, ContactName AS "Contact Person" FROM Customers;
+SELECT CustomerID AS ID, CustomerName AS Customer FROM Customers;
+
+9. Mempraktekan  Syntax INNER JOIN & SELF JOIN
+SELECT Orders.OrderID, Customers.CustomerName, Orders.OrderDate
+FROM Orders INNER JOIN Customers ON Orders.CustomerID = Customers.CustomerID;
+
+SELECT O.OrderID, C.CustomerName, O.OrderDate FROM Orders O
+INNER JOIN Customers C ON O.CustomerID = C.CustomerID;
+
+10. Mempraktekan Syntax DISTINCT & CASE
+SELECT DISTINCT kota FROM pelanggan;
+SELECT COUNT(DISTINCT Country) FROM Customers;
+
+
+SELECT OrderID, Quantity, CASE
+WHEN Quantity > 30 THEN "The quantity is greater than 30"
+WHEN Quantity = 30 THEN "The quantity is 30"
+ELSE 'The quantity is under 30' 
+END AS QuantityText FROM OrderDetails;
+
+11. Mempraktekkan Syntax DML
+INSERT INTO Customers (CustomerName, City, Country) SELECT SúpplierName, City, Country FROM Suppliers;
+
+INSERT INTO Customers (CustomerName, City, Country) VALUES ('Cardinal', 'Stavanger', 'Norway');
+
+
+UPDATE Customers SET ContactName = 'Alfred Schmidt', City = 'Frankfurt' WHERE CustomerID = 1;
+
+UPDATE Customers SET ContactName = "Juan" WHERE Country = "Mexico";
+
+DELETE FROM Customers WHERE CustomerName = 'Altredis Futterkiste';
