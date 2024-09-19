@@ -88,9 +88,10 @@ FROM Product LIMIT 10;
 
 
 8. Mempraktekan Syntax GROUP BY
-ELECT city, COUNT(*) AS Jumlah_pelanggan 
+SELECT city, COUNT(*) AS Jumlah_pelanggan 
 FROM Customers
 GROUP BY city;
+
 8. Mempraktekan Syntax ALIAS
 SELECT CustomerName, City, Country FROM Customers;
 SELECT CustomerName AS Customer, ContactName AS "Contact Person" FROM Customers;
@@ -118,7 +119,7 @@ ELSE 'The price is under 30'
 END AS PriceText FROM Product;
 
 11. Mempraktekkan Syntax DML
-SERT INTO Customers (CustomerName, City, Country) SELECT SupplierID, CategoryID, Unit FROM Product;
+INSERT INTO Customers (CustomerName, City, Country) SELECT SupplierID, CategoryID, Unit FROM Product;
 
 INSERT INTO Customers (CustomerName, City, Country) VALUES ('Cardinal', 'Stavanger', 'Norway');
 
