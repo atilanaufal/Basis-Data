@@ -1,0 +1,51 @@
+CREATE DATABASE OneAndGrow;
+
+CREATE TABLE Users(
+   userID INT AUTO_INCREMENT PRIMARY KEY,
+   username VARCHAR(100) NOT NULL,
+   email VARCHAR(100) NOT NULL UNIQUE,
+   pass VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE DataAnak (
+   anakID INT AUTO_INCREMENT PRIMARY KEY,
+   namaAnak VARCHAR(100) NOT NULL,
+   kotaLahir VARCHAR(100) NOT NULL,
+   tanggalLahir DATE DEFAULT '1999-01-01',
+   kelamin VARCHAR(20) NOT NULL,
+   umur TINYINT,
+   tinggi INT,
+   berat INT
+);
+
+CREATE TABLE TumbuhKembang (
+   anakID INT,
+   namaAnak VARCHAR(100) NOT NULL REFERENCES DataAnak(namaAnak),
+   kelamin VARCHAR(30) NOT NULL REFERENCES DataAnak(kelamin),
+   tinggi INT REFERENCES DataAnak(tinggi),
+   berat INT  REFERENCES DataAnak(berat),
+   tanggalLahir VARCHAR(100) NOT NULL REFERENCES DataAnak(tanggalLahir),
+   dates TINYINT NOT NULL,
+   months VARCHAR(20),
+   FOREIGN KEY(anakID) REFERENCES DataAnak(anakID)
+);
+
+CREATE TABLE WaktuMakan (
+   anakID INT,
+   namaAnak VARCHAR(100) NOT NULL REFERENCES DataAnak(namaAnak),
+   sarapan TIME DEFAULT '00:00',
+   makanSiang TIME DEFAULT '00:00',
+   makanMalam TIME DEFAULT '00:00',
+   FOREIGN KEY(anakID) REFERENCES DataAnak(anakID)
+);
+
+CREATE TABLE JadwalKegiatan(
+   anakID INT,
+   namaAnak VARCHAR(100) NOT NULL REFERENCES DataAnak(namaAnak),
+   kalender DATE DEFAULT '1999-01-01',
+   kegiatan VARCHAR(100),
+   mulai TIME DEFAULT '00:00',
+   selesai TIME DEFAULT '00:00',
+   FOREIGN KEY(anakID) REFERENCES DataAnak(anakID)
+);
+
