@@ -1,5 +1,12 @@
+-- Athillah Naufal Al-Falah(2023071002)
+-- Daffa Ma'ruf(2023071008)
+
+-- 1. Membuat database 
+-- Membuat database untuk aplikasi one&grow
 CREATE DATABASE OneAndGrow;
 
+-- 2. Membuat tabel
+-- Membuat tabel akun user
 CREATE TABLE Users(
    userID INT AUTO_INCREMENT PRIMARY KEY,
    username VARCHAR(100) NOT NULL,
@@ -7,45 +14,79 @@ CREATE TABLE Users(
    pass VARCHAR(100) NOT NULL
 );
 
+-- Membuat tabel untuk data anak
 CREATE TABLE DataAnak (
-   anakID INT AUTO_INCREMENT PRIMARY KEY,
+   userID INT,
+   anakID INT  NOT NULL,
    namaAnak VARCHAR(100) NOT NULL,
    kotaLahir VARCHAR(100) NOT NULL,
    tanggalLahir DATE DEFAULT '1999-01-01',
    kelamin VARCHAR(20) NOT NULL,
-   umur TINYINT,
-   tinggi INT,
-   berat INT
+   umur TINYINT NOT NULL,
+   tinggi INT NOT NULL,
+   berat INT NOT NULL
 );
 
+-- Membuat tabel untuk tumbuh kembang
 CREATE TABLE TumbuhKembang (
-   anakID INT,
-   namaAnak VARCHAR(100) NOT NULL REFERENCES DataAnak(namaAnak),
-   kelamin VARCHAR(30) NOT NULL REFERENCES DataAnak(kelamin),
-   tinggi INT REFERENCES DataAnak(tinggi),
-   berat INT  REFERENCES DataAnak(berat),
-   tanggalLahir VARCHAR(100) NOT NULL REFERENCES DataAnak(tanggalLahir),
+   anakID INT NOT NULL,
+   namaAnak VARCHAR(100) NOT NULL,
+   kelamin VARCHAR(30) NOT NULL,
+   tinggi INT NOT NULL,
+   berat INT  NOT NULL,
+   tanggalLahir DATE DEFAULT '1999-01-01',
    dates TINYINT NOT NULL,
-   months VARCHAR(20),
-   FOREIGN KEY(anakID) REFERENCES DataAnak(anakID)
+   months VARCHAR(20) NOT NULL
 );
 
+-- Membuat tabel untuk waktu makan
 CREATE TABLE WaktuMakan (
-   anakID INT,
-   namaAnak VARCHAR(100) NOT NULL REFERENCES DataAnak(namaAnak),
+   anakID INT NOT NULL,
+   namaAnak VARCHAR(100) NOT NULL,
    sarapan TIME DEFAULT '00:00',
    makanSiang TIME DEFAULT '00:00',
-   makanMalam TIME DEFAULT '00:00',
-   FOREIGN KEY(anakID) REFERENCES DataAnak(anakID)
+   makanMalam TIME DEFAULT '00:00'
 );
 
+-- Membuat tabel untuk jadwal kegiatan
 CREATE TABLE JadwalKegiatan(
-   anakID INT,
-   namaAnak VARCHAR(100) NOT NULL REFERENCES DataAnak(namaAnak),
+   anakID INT NOT NULL,
+   namaAnak VARCHAR(100) NOT NULL ,
    kalender DATE DEFAULT '1999-01-01',
-   kegiatan VARCHAR(100),
+   kegiatan VARCHAR(100) NOT NULL,
    mulai TIME DEFAULT '00:00',
-   selesai TIME DEFAULT '00:00',
-   FOREIGN KEY(anakID) REFERENCES DataAnak(anakID)
+   selesai TIME DEFAULT '00:00'
 );
+
+-- 3. Relasi antar tabel
+-- 1). tabel data anak terhubung dengan tabel user melalui kolom userID, jadi ketika user membuat akun baru, maka setiap data yang user buat 
+-- dalam aplikasi hanyalah untuk user tersebut
+-- 2). tabel jadwal makan, tumbuh kembang, dan jadwal kegiatan terhubung dengan tabel data anak melalui kolum yang sama seperti nama anak, 
+-- jadi setiap kali user menambahkan data anak baru, maka secara otomatis nama anak dari tabel data anak akan dibagikan juga ke tabel lain yang memiliki kolom yang sama,
+-- jadi user hanya perlu memilih nama anak yang akan digunakan sehingga user tidak perlu repot menginput kembali nama anak
+
+-- 4. Proses CRUD
+-- 1)	CREATE:
+INSERT INTO Users(username, email, pass)
+VALUES("Maya", 'mayalatifah@gmail.com', 12345);
+
+-- b)	INSERT INTO DataAnak(anakID, namaAnak, kotaLahir, tanggalLahir, kelamin, umur, tinggi, berat)
+Values(1, "Mustafar", 'Apex', '2005-09-11', 'pria', 19, 178, 68);
+
+-- 2)	READ:
+SELECT * FROM Users;
+SELECT * FROM DataAnak;
+SELECT * FROM JadwalKegiatan;
+
+-- 3)	UPDATE:
+UPDATE JadwalKegiatan
+SET kalender = CURDATE(), kegiatan =  'les piano',  mulai = '10:00', selesai = '11:30' WHERE namaAnak = 'Mustafar';
+UPDATE WaktuMakan
+SET sarapan = '08:00', makanSiang = '13:30', makanMalam = '18:30' WHERE namaAnak = 'Mustafar';
+
+-- 4)	DELETE:
+DELETE FROM DataAnak WHERE namaAnak = 'Mustafar';
+
+
+
 
