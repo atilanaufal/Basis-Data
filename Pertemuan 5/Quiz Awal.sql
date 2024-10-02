@@ -1,0 +1,46 @@
+CREATE DATABASE INV;
+
+CREATE TABLE Invoices (
+  Total DECIMAL(6,2)
+);
+
+
+INSERT INTO Invoices (Total) VALUES 
+(1.98),
+(3.96),
+(5.94),
+(8.91),
+(13.86),
+(0.99),
+(1.98),
+(3.96),
+(5.94),
+(8.91),
+(13.86),
+(0.99),
+(1.98),
+(3.96),
+(5.94),
+(8.91),
+(13.86),
+(0.99),
+(1.98),
+(3.96),
+(5.94),
+(8.91);
+
+
+SELECT * FROM INVOICES;
+
+SELECT total % 0.75 FROM INVOICES;
+
+SELECT total + 0.25 FROM INVOICES;
+
+SELECT total - 0.15 FROM INVOICES;
+
+SELECT total * 2 FROM INVOICES;
+
+SELECT total / 2 FROM INVOICES;
+
+SELECT total % 2  FROM INVOICES;
+
