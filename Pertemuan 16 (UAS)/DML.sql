@@ -48,3 +48,7 @@ COMMIT;
 
 -- Lihat Data Tabel
 SELECT * FROM data_anak;
+
+-- Hapus Data Anak
+DELETE FROM data_anak
+WHERE nama_anak = 'Dita';
