@@ -1,0 +1,23 @@
+-- Memanggil stored procedure tambah_akun_admin
+CALL tambah_akun_admin('Admin', 'admin@gmail.com', 'admin123');
+
+-- Memanggil stored procedure tambah_akun_user
+CALL tambah_akun_user('Daffa', 'daffa@gmail.com', 'orang_tua', 'password123');
+
+-- Memanggil stored procedure tambah_data_anak
+CALL tambah_data_anak(1, "Ma'ruf", '2020-01-15', 'laki-laki', 'Bermain', 20.5, 90.2);
+
+-- Memanggil stored procedure tambah_jadwal_makan
+CALL tambah_jadwal_makan(1, '07:00:00', 'Roti', '12:00:00', 'Nasi Goreng', '19:00:00', 'Sayur Sop');
+
+-- Memanggil stored procedure tambah_jadwal_tidur
+CALL tambah_jadwal_tidur(1, '21:00:00', '06:00:00');
+
+-- Memanggil stored procedure tambah_kegiatan_anak
+CALL tambah_kegiatan_anak(1, 'Belajar', '08:00:00', '10:00:00');
+
+-- Memanggil stored procedure tambah_riwayat_kesehatan
+CALL tambah_riwayat_kesehatan(1, 'Demam', 'Paracetamol', '2023-12-18 08:00:00', '2023-12-20 10:00:00');
+
+-- Memanggil stored procedure lihat_data_anak
+CALL lihat_data_anak(1);
