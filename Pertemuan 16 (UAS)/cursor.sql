@@ -28,8 +28,9 @@ BEGIN
 END //
 DELIMITER ;
 
-
 DELIMITER //
+
+-- Cursor untuk menampilkan data user 
 CREATE PROCEDURE tampilkan_semua_user()
 BEGIN
     DECLARE done INT DEFAULT FALSE;
@@ -55,6 +56,36 @@ BEGIN
 
     CLOSE user_cursor;
 END //
-
 DELIMITER ;
 
+
+-- Cursor untuk menampilkan kegiatan_anak yang terkait
+DELIMITER //
+CREATE PROCEDURE kegiatan_anak_cursor()
+BEGIN
+    DECLARE done INT DEFAULT FALSE;
+    DECLARE v_id_kegiatan INT;
+    DECLARE v_nama_kegiatan VARCHAR(255);
+    DECLARE v_waktu_mulai TIME;
+    DECLARE v_waktu_selesai TIME;
+    
+    DECLARE anak_cursor CURSOR FOR
+        SELECT id_kegiatan, nama_kegiatan, waktu_mulai, waktu_selesai
+        FROM kegiatan_anak;
+
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
+
+    OPEN anak_cursor;
+
+    read_loop: LOOP
+        FETCH anak_cursor INTO v_id_kegiatan, v_nama_kegiatan, v_waktu_mulai, v_waktu_selesai;
+        IF done THEN
+            LEAVE read_loop;
+        END IF;
+        SELECT v_id_kegiatan, v_nama_kegiatan, v_waktu_mulai, v_waktu_selesai;
+    END LOOP;
+
+    CLOSE anak_cursor;
+END //
+
+DELIMITER ;
