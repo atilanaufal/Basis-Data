@@ -6,7 +6,6 @@ SELECT
     da.tanggal_lahir,
     da.umur,
     da.jenis_kelamin,
-    da.hobi,
     da.berat_badan_kg,
     da.tinggi_badan_cm,
     au.nama_user
