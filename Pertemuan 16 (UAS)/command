@@ -1,0 +1,64 @@
+-- login cmd
+.\mysql -u admin1@gmail.com -p -h localhost -D ParentWatch
+
+CALL tambah_akun_admin('admin2', 'admin2@gmail.com', 'admin123');
+
+-- Memanggil stored procedure tambah_akun_user
+CALL tambah_akun_user('Anna', 'anna@gmail.com', 'orang_tua', 'user123');
+
+-- Memanggil stored procedure tambah_akun_user
+CALL tambah_akun_user('gita', 'gita@gmail.com', 'pengasuh', 'user123');
+
+-- Memanggil stored procedure tambah_data_anak
+CALL tambah_data_anak(3, "Leo", '2022-06-10', 'laki-laki', 20.5, 90.2);
+CALL tambah_data_anak(3, "Lina", '2019-12-11', 'perempuan', 45, 125);
+
+-- Memanggil stored procedure tambah_jadwal_makan
+CALL tambah_jadwal_makan(3, '07:00:00', 'Susu Formula', '12:00:00', 'Bubur Bayi', '19:00:00', 'Bubur Bayi');
+CALL tambah_jadwal_makan(4, '07:00:00', 'Energen', '12:00:00', 'Kangkung', '19:00:00', 'Soto Betawi');
+
+-- Memanggil stored procedure tambah_jadwal_tidur
+CALL tambah_jadwal_tidur(3, '19:00:00', '06:00:00');
+CALL tambah_jadwal_tidur(4, '21:00:00', '04:30:00');
+
+-- Memanggil stored procedure tambah_kegiatan_anak
+CALL tambah_kegiatan_anak(3, 'Main', '08:00:00', '10:00:00');
+CALL tambah_kegiatan_anak(4, 'Belajar Baca', '05:00:00', '05:45:00');
+
+-- Memanggil stored procedure tambah_riwayat_kesehatan
+CALL tambah_riwayat_kesehatan(4, 'Flu', 'Paracetamol', '2023-12-18 08:00:00', '2023-12-20 10:00:00');
+
+-- Memanggil stored procedure lihat_data_anak
+CALL lihat_data_anak(1);
+
+
+-- Memanggil stored procedure update_data_anak
+CALL update_data_anak(1, 1, 'Reno', '2020-02-10', 'laki-laki', 22.8, 95.7);
+
+-- Memanggil stored procedure update_jadwal_makan
+CALL update_jadwal_makan(1, 1, '07:30:00', 'Energen', '12:30:00', 'Nasi Padang', '19:30:00', 'Telur');
+
+-- Menghapus kegiatan anak dengan id_kegiatan = 6
+CALL hapus_kegiatan_anak(1);
+
+-- Menghapus riwayat kesehatan dengan id_kesehatan = 7
+CALL hapus_riwayat_kesehatan(1);
+
+
+
+
+CALL hak_admin("admin2@gmail.com", "admin123");
+
+DROP USER 'admin2@gmail.com'@'localhost';
+DROP USER 'daffa@gmail.comr'@'localhost';
+DROP USER 'budi@gmail.com'@'localhost';
+
+CALL hapus_hak_admin("admin1@gmail.com");
+CALL hapus_hak_user("daffa@gmail.com");
+CALL hapus_hak_user("budi@gmail.com");
+
+
+-- Memanggil stored procedure untuk menjalankan cursor
+CALL data_anak_cursor();
+CALL tampilkan_semua_user();
+CALL kegiatan_anak_cursor();
