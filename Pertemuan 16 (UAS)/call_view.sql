@@ -12,3 +12,6 @@ SELECT * FROM aktivitas_user;
 
 -- Memanggil view aktivitas_admin
 SELECT * FROM aktivitas_admin;
+
+-- Memanggil view user_list
+SELECT * FROM user_list;
