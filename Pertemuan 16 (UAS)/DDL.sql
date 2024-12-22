@@ -31,7 +31,6 @@ CREATE TABLE IF NOT EXISTS data_anak (
     tanggal_lahir DATE NOT NULL,
     umur INT NOT NULL,
     jenis_kelamin ENUM('laki-laki', 'perempuan') NOT NULL,
-    hobi TEXT,
     berat_badan_kg DECIMAL(5,2), -- Berat badan (kg) dengan dua desimal
     tinggi_badan_cm DECIMAL(5,2), -- Tinggi badan (cm) dengan dua desimal
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
